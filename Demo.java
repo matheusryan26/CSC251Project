@@ -1,29 +1,49 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
+
 
 public class Demo {
-    public static void main(String[] args) {
-        ArrayList<Policy> policies = new ArrayList<>();
+    public static void main(String[] args) throws IOException {
 
-        policies.add(new Policy(3450, "State Farm", "Alice", "Jones", 20, "smoker", 65.0, 110.0));
-        policies.add(new Policy(3455, "Aetna", "Bob", "Lee", 54, "non-smoker", 72.0, 200.0));
-        policies.add(new Policy(2450, "Met Life", "Chester", "Williams", 40, "smoker", 71.0, 300.0));
-        policies.add(new Policy(3670, "Global", "Cindy", "Smith", 55, "non-smoker", 62.0, 140.0));
-        policies.add(new Policy(1490, "Reliable", "Jenna", "Lewis", 30, "smoker", 60.0, 105.0));
-        policies.add(new Policy(3477, "State Farm", "Craig", "Duncan", 23, "smoker", 66.0, 215.0));
+        File file = new File("PolicyInformation.txt");
+        Scanner inputFile = new Scanner(file);
+
+        ArrayList<Policy> policies = new ArrayList<>();
 
         int smokerCount = 0;
         int nonSmokerCount = 0;
 
-        for (Policy p : policies) {
-            p.displayPolicyInfo();
+        while (inputFile.hasNext()) {
+            int policyNumber = Integer.parseInt(inputFile.nextLine());
+            String providerName = inputFile.nextLine();
+            String firstName = inputFile.nextLine();
+            String lastName = inputFile.nextLine();
+            int age = Integer.parseInt(inputFile.nextLine());
+            String smokingStatus = inputFile.nextLine();
+            double height = Double.parseDouble(inputFile.nextLine());
+            double weight = Double.parseDouble(inputFile.nextLine());
 
-            if (p.getSmokingStatus().equalsIgnoreCase("smoker")) {
+            PolicyHolder holder = new PolicyHolder(firstName, lastName, age, smokingStatus, height, weight);
+            Policy policy = new Policy(policyNumber, providerName, holder);
+
+
+            policies.add(policy);
+
+            if (smokingStatus.equalsIgnoreCase("smoker")) {
                 smokerCount++;
             } else {
                 nonSmokerCount++;
             }
         }
 
+        inputFile.close();
+
+        for (Policy p : policies) {
+            System.out.println(p);
+            System.out.println();
+        }
+
+        System.out.println("There were " + Policy.getPolicyCount() + " Policy objects created.");
         System.out.println("The number of policies with a smoker is: " + smokerCount);
         System.out.println("The number of policies with a non-smoker is: " + nonSmokerCount);
     }
