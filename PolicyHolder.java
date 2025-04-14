@@ -6,6 +6,7 @@ public class PolicyHolder {
     private double height;
     private double weight;
 
+
     public PolicyHolder(String fName, String lName, int a, String smoking, double h, double w) {
         firstName = fName;
         lastName = lName;
@@ -33,5 +34,15 @@ public class PolicyHolder {
 
     public double getBMI() {
         return (weight * 703) / (height * height);
+    }
+
+    public String toString() {
+        return "Policyholder's First Name: " + firstName +
+               "\nPolicyholder's Last Name: " + lastName +
+               "\nPolicyholder's Age: " + age +
+               "\nPolicyholder's Smoking Status (Y/N): " + smokingStatus +
+               String.format("\nPolicyholder's Height: %.1f inches", height) +
+               String.format("\nPolicyholder's Weight: %.1f pounds", weight) +
+               String.format("\nPolicyholder's BMI: %.2f", getBMI());
     }
 }
