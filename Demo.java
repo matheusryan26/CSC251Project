@@ -14,6 +14,9 @@ public class Demo {
         int nonSmokerCount = 0;
 
         while (inputFile.hasNext()) {
+            String line = inputFile.nextLine().trim();
+            if (line.isEmpty()) break;
+    
             int policyNumber = Integer.parseInt(inputFile.nextLine());
             String providerName = inputFile.nextLine();
             String firstName = inputFile.nextLine();
