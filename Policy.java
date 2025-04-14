@@ -12,17 +12,11 @@ public class Policy {
         policyCount++;
     }
 
-    public int getPolicyNumber() {
-        return policyNumber;
-    }
 
-    public String getProviderName() {
-        return providerName;
-    }
-    
-    public PolicyHolder getPolicyHolder() {
-        return new PolicyHolder(policyHolder);
-    }
+    public int getPolicyNumber() { return policyNumber; }
+    public String getProviderName() { return providerName; }
+    public PolicyHolder getPolicyHolder() { return new PolicyHolder(policyHolder); }
+
 
     public double getPolicyPrice() {
         double baseFee = 600;
